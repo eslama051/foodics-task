@@ -12,7 +12,7 @@
           Disable Reservations
         </BaseButton>
 
-        <!-- Un comment the button blow for showing a btn that enables all branches  -->
+        <!-- uncomment the button blow for showing a btn that enables all branches  -->
 
         <!-- <BaseButton -->
         <!--   v-if="disabledBranches.length > 0" -->
