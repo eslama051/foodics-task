@@ -37,8 +37,8 @@ Reusable logic (API calls, toasts, theme) to prevent redundancy.
 When enabling multiple branches, we do it one by one instead of all at once. Slower  (much slower in fact) but we can show which ones failed.
 
 **why not closing the model while disabling or enabling all branches 
-(there is a button for enableing all branches, it hashed as it was not required in the ask)**
-so we let the user know that that this will take a while taht he should wait be making any curcial changes as in fact this action is very imporant in itself 
+(there is a button for enableing all branches, it is hashed as it was not required in the task)**
+so we let the user know that that this action  will take a while,  he should wait before making any curcial changes as in fact this action is very imporant in itself 
 
 
 ## Tech Stack
