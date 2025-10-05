@@ -35,7 +35,7 @@
         @click="selectOption(option)"
         class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer flex items-center text-gray-900 dark:text-gray-100 transition-colors duration-150 text-sm"
         :class="{
-          'bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary': isSelected(
+          'bg-primary/10 dark:bg-primary/20 text-primary dark:text-gray-50': isSelected(
             option.value,
           ),
         }"
