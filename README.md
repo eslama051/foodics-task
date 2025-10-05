@@ -78,4 +78,12 @@ Simple toast system.
 - `GET /branches?include[0]=sections&include[1]=sections.tables`
 - `PUT /branches/:id`
 
-The end#. 
+## Screenshots
+
+![Screenshot 1](screen_shots/screenshot-2025-10-05_11-26-59.png)
+![Screenshot 2](screen_shots/screenshot-2025-10-05_11-27-16.png)
+![Screenshot 3](screen_shots/screenshot-2025-10-05_11-27-31.png)
+![Screenshot 4](screen_shots/screenshot-2025-10-05_11-27-45.png)
+![Screenshot 5](screen_shots/screenshot-2025-10-05_11-27-56.png)
+![Screenshot 6](screen_shots/screenshot-2025-10-05_11-28-27.png)
+![Screenshot 7](screen_shots/screenshot-2025-10-05_11-29-16.png) 
