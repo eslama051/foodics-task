@@ -10,7 +10,7 @@ npm run dev
 
 
 ## Project Structure
-
+```
 src/
  views/ReservationsView.vue       # Main page
  stores/reservation.ts            # All the data and API logic
@@ -23,7 +23,7 @@ src/
    useApi.ts                    # Api requests
    useToast.ts                  # Notifications
    useTheme.ts                  # Dark/light mode
-
+```
 
 ## Key Decisions
 
