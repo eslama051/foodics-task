@@ -58,28 +58,55 @@ export const useReservationStore = defineStore('reservation', () => {
 
   const toggleBranchReservations = async (enable: boolean) => {
     const branchesToUpdate = enable ? disabledBranches.value : availableBranches.value
-    const results = []
+
+    // Promise.allSettled approach
+    const promises = branchesToUpdate.map(async (branch) => {
+      await put(`/branches/${branch.id}`, {
+        accepts_reservations: enable
+      })
+
+      const branchIndex = branches.value.findIndex(b => b.id === branch.id)
+      if (branchIndex !== -1 && branches.value[branchIndex]) {
+        branches.value[branchIndex].accepts_reservations = enable
+      }
+
+      return { branch: branch.name, status: 'success' }
+    })
+
+    const settledResults = await Promise.allSettled(promises)
+
+    return settledResults.map((result) => {
+      if (result.status === 'fulfilled') {
+        return result.value
+      } else {
+        // Extract branch name from the error if possible, or use a generic message
+        return {
+          status: 'failed',
+          error: result.reason
+        }
+      }
+    })
 
     // Sequential approach - slower but we can detect which ones have failed
-    for await (const branch of branchesToUpdate) {
-      try {
-        await put(`/branches/${branch.id}`, {
-          accepts_reservations: enable
-        })
-
-        const branchIndex = branches.value.findIndex(b => b.id === branch.id)
-
-        if (branchIndex !== -1 && branches.value[branchIndex]) {
-          branches.value[branchIndex].accepts_reservations = enable
-        }
-
-        results.push({ branch: branch.name, status: 'success' })
-      } catch (err) {
-        results.push({ branch: branch.name, status: 'failed', error: err })
-      }
-    }
-
-    return results
+    // const results = []
+    // for await (const branch of branchesToUpdate) {
+    //   try {
+    //     await put(`/branches/${branch.id}`, {
+    //       accepts_reservations: enable
+    //     })
+    //
+    //     const branchIndex = branches.value.findIndex(b => b.id === branch.id)
+    //
+    //     if (branchIndex !== -1 && branches.value[branchIndex]) {
+    //       branches.value[branchIndex].accepts_reservations = enable
+    //     }
+    //
+    //     results.push({ branch: branch.name, status: 'success' })
+    //   } catch (err) {
+    //     results.push({ branch: branch.name, status: 'failed', error: err })
+    //   }
+    // }
+    // return results
 
     // Promise.all approach - faster but all-or-nothing
     // const promises = branchesToUpdate.map(async (branch) => {
@@ -103,27 +130,54 @@ export const useReservationStore = defineStore('reservation', () => {
   }
 
   const enableSelectedBranchReservations = async (selectedBranches: string[]) => {
-    const results = []
+    // Promise.allSettled approach
+    const promises = selectedBranches.map(async (branchID) => {
+      await put(`/branches/${branchID}`, {
+        accepts_reservations: true
+      })
 
-    for await (const branchID of selectedBranches) {
-      try {
-        await put(`/branches/${branchID}`, {
-          accepts_reservations: true
-        })
+      const branchIndex = branches.value.findIndex(b => b.id === branchID)
 
-        const branchIndex = branches.value.findIndex(b => b.id === branchID)
-
-        if (branchIndex !== -1 && branches.value[branchIndex]) {
-          branches.value[branchIndex].accepts_reservations = true
-        }
-
-        results.push({ status: 'success' })
-      } catch (err) {
-        results.push({ status: 'failed', error: err })
+      if (branchIndex !== -1 && branches.value[branchIndex]) {
+        branches.value[branchIndex].accepts_reservations = true
       }
-    }
 
-    return results
+      return { status: 'success' }
+    })
+
+    const settledResults = await Promise.allSettled(promises)
+
+    return settledResults.map((result) => {
+      if (result.status === 'fulfilled') {
+        return result.value
+      } else {
+        return {
+          status: 'failed',
+          error: result.reason
+        }
+      }
+    })
+
+    // Sequential approach - slower but we can detect which ones have failed
+    // const results = []
+    // for await (const branchID of selectedBranches) {
+    //   try {
+    //     await put(`/branches/${branchID}`, {
+    //       accepts_reservations: true
+    //     })
+    //
+    //     const branchIndex = branches.value.findIndex(b => b.id === branchID)
+    //
+    //     if (branchIndex !== -1 && branches.value[branchIndex]) {
+    //       branches.value[branchIndex].accepts_reservations = true
+    //     }
+    //
+    //     results.push({ status: 'success' })
+    //   } catch (err) {
+    //     results.push({ status: 'failed', error: err })
+    //   }
+    // }
+    // return results
   }
 
   const updateBranch = async (branch: Branch) => {
