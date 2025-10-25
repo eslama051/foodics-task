@@ -9,7 +9,7 @@
         @click="toggleDropdown"
         class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-left flex items-center justify-between"
       >
-        <span class="truncate">{{ displayText }}</span>
+        <span class="truncate" :class="{ 'text-gray-400 dark:text-gray-500': !model }">{{ displayText }}</span>
         <span class="w-[30px]">
           <ChevronDownIcon />
         </span>

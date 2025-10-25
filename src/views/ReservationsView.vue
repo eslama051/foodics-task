@@ -12,16 +12,14 @@
           Disable Reservations
         </BaseButton>
 
-        <!-- uncomment the button blow for showing a btn that enables all branches  -->
-
-        <!-- <BaseButton -->
-        <!--   v-if="disabledBranches.length > 0" -->
-        <!--   variant="primary" -->
-        <!--   :loading="enableConfirmLoading" -->
-        <!--   @click="showEnableConfirm = true" -->
-        <!-- > -->
-        <!--   Enable Reservations -->
-        <!-- </BaseButton> -->
+        <BaseButton
+          v-if="disabledBranches.length > 0"
+          variant="primary"
+          :loading="enableConfirmLoading"
+          @click="showEnableConfirm = true"
+        >
+          Enable Reservations
+        </BaseButton>
       </div>
     </div>
 
