@@ -61,14 +61,11 @@ input[type='time'] {
 }
 
 /* Make time input icon white in dark mode */
-input[type='time']::-webkit-calendar-picker-indicator {
+/* input[type='time']::-webkit-calendar-picker-indicator { */
+/*   filter: invert(1); */
+/* } */
+
+.dark input[type='time']::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
-
-@media (prefers-color-scheme: dark) {
-  input[type='time']::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-  }
-}
-
 </style>

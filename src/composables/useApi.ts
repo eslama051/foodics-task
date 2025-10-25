@@ -2,7 +2,7 @@ import axios from 'axios'
 import { ref } from 'vue'
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.DEV ? '/api' : (import.meta.env.VITE_API_BASE_URL || 'https://api.foodics.dev/v5'),
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
